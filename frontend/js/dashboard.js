@@ -8,7 +8,7 @@ async function loadDashboard() {
             `Welcome ${user.userid} (${user.role})`;
 
         if (user.role === "student") {
-            loadStudentView();
+            loadStudentDashboard();
         } else if (user.role === "recruiter") {
             loadRecruiterView();
         } else if (user.role === "admin") {

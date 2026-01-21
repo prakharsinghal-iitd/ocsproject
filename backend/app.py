@@ -96,7 +96,7 @@ def profiles():
     userid = request.user["userid"]
 
     #For students and admin, fetch all profiles
-    if role=="student" or role=="admin":
+    if role=="admin" or role=="student":
         conn = get_db_connection()
         cur = conn.cursor()
 
@@ -389,6 +389,38 @@ def create_profile():
     return jsonify({
   "message": "Profile created successfully"
 })
+
+@app.route("/api/application/me")
+@auth_required
+def myapplications():
+    role = request.user["role"]
+    userid = request.user["userid"]
+
+    if role=="student":
+        conn = get_db_connection()
+        cur = conn.cursor()
+
+        cur.execute(
+        "SELECT a.profile_code,p.company_name,p.designation,a.status FROM application a JOIN profile p ON a.profile_code = p.profile_code WHERE a.entry_number = %s",(userid,))
+
+        profiles=cur.fetchall()
+
+        cur.close()
+        conn.close()
+
+        res={"applications":[],"count":0}
+        for row in profiles:
+            res["applications"].append({
+          "profile_code": row[0],
+          "company_name": row[1],
+          "designation":  row[2],
+          "status": row[3]})
+            res["count"]+=1
+
+        return jsonify(res)
+    else:
+        return jsonify({"error": "Forbidden"}), 403
+
 
 
 
