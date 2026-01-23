@@ -113,7 +113,7 @@ async function renderProfileList(appliedProfiles) {
 
         const btn = document.createElement("button");
         if (appliedProfiles.has(profile.profile_code)) {
-	    btn.textContent = "Applied";
+	    btn.textContent = appliedProfiles.get(profile.profile_code);
 	    btn.disabled = true;
 	} else {
 	    btn.textContent = "Apply";

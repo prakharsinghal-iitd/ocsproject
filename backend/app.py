@@ -418,6 +418,28 @@ def myapplications():
             res["count"]+=1
 
         return jsonify(res)
+    elif role=="recruiter":
+        conn = get_db_connection()
+        cur = conn.cursor()
+
+        cur.execute(
+        "SELECT a.profile_code,a.entry_number,a.status FROM application a JOIN profile p ON a.profile_code = p.profile_code WHERE p.recruiter_email = %s",(userid,))
+
+        profiles=cur.fetchall()
+
+        cur.close()
+        conn.close()
+
+        res={"applications":[],"count":0}
+        for row in profiles:
+            res["applications"].append({
+          "profile_code": row[0],
+          "entry_number": row[1],
+          "status": row[2]})
+            res["count"]+=1
+
+        return jsonify(res)
+
     else:
         return jsonify({"error": "Forbidden"}), 403
 

@@ -10,9 +10,9 @@ async function loadDashboard() {
         if (user.role === "student") {
             loadStudentDashboard();
         } else if (user.role === "recruiter") {
-            loadRecruiterView();
+            loadRecruiterDashboard();
         } else if (user.role === "admin") {
-            loadAdminView();
+            loadAdminDashboard();
         }
 
     } catch (err) {
