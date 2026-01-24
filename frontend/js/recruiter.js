@@ -15,7 +15,7 @@ async function loadRecruiterDashboard() {
     const applications = data.applications;
     const grouped = groupByProfile(applications);
     await renderRecruiterProfiles(content);
-    await renderApplications(grouped,content);
+    await renderRecruiterApplications(grouped,content);
 
 }
 
@@ -94,7 +94,7 @@ function groupByProfile(applications) {
 
 /* ---------------- APPLICATIONS LIST ---------------- */
 
-function renderApplications(groupedApplications,parent) {
+function renderRecruiterApplications(groupedApplications,parent) {
     
 
     for (const profileCode in groupedApplications) {

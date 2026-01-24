@@ -89,6 +89,34 @@ def login():
 def me():
     return jsonify(request.user)
 
+@app.route("/api/users")
+@auth_required
+def users():
+    role = request.user["role"]
+    if role!="admin":
+        return jsonify({"error": "Forbidden"}), 403
+    conn = get_db_connection()
+    cur = conn.cursor()
+
+    cur.execute(
+    "SELECT userid,role FROM users")
+
+    users=cur.fetchall()
+
+    cur.close()
+    conn.close()
+
+    #Convert data into json
+    res={"users":[],"count":0}
+    for row in users:
+        res["users"].append({
+      "userid": row[0],
+      "role": row[1]})
+        res["count"]+=1
+
+    return jsonify(res)
+
+
 @app.route("/api/profiles")
 @auth_required
 def profiles():
@@ -101,7 +129,7 @@ def profiles():
         cur = conn.cursor()
 
         cur.execute(
-        "SELECT profile_code,company_name,designation FROM profile")
+        "SELECT * FROM profile")
 
         profiles=cur.fetchall()
 
@@ -114,7 +142,7 @@ def profiles():
         cur = conn.cursor()
 
         cur.execute(
-        "SELECT profile_code,company_name,designation FROM profile WHERE recruiter_email=%s",(userid,))
+        "SELECT * FROM profile WHERE recruiter_email=%s",(userid,))
 
         profiles=cur.fetchall()
 
@@ -129,8 +157,9 @@ def profiles():
     for row in profiles:
         res["profiles"].append({
       "profile_code": row[0],
-      "company_name": row[1],
-      "designation":  row[2]})
+      "company_name": row[2],
+      "designation":  row[3],
+      "recruiter_email": row[1]})
         res["count"]+=1
 
     return jsonify(res)
@@ -441,7 +470,26 @@ def myapplications():
         return jsonify(res)
 
     else:
-        return jsonify({"error": "Forbidden"}), 403
+        conn = get_db_connection()
+        cur = conn.cursor()
+
+        cur.execute(
+        "SELECT * FROM application")
+
+        profiles=cur.fetchall()
+
+        cur.close()
+        conn.close()
+
+        res={"applications":[],"count":0}
+        for row in profiles:
+            res["applications"].append({
+          "profile_code": row[0],
+          "entry_number": row[1],
+          "status": row[2]})
+            res["count"]+=1
+
+        return jsonify(res)
 
 
 
