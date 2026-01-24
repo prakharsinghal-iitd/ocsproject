@@ -128,7 +128,7 @@ function renderRecruiterApplications(groupedApplications,parent) {
 
 
 		const rejectBtn = document.createElement("button");
-                rejectBtn.textContent = "Select";
+                rejectBtn.textContent = "Reject";
                 rejectBtn.dataset.profileCode = profileCode;
                 rejectBtn.dataset.entryNumber = app.entry_number;
                 rejectBtn.onclick = rejectRecruiterStatus;
