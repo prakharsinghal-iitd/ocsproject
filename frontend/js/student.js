@@ -62,9 +62,11 @@ function renderSelected(app) {
 
     const acceptBtn = document.createElement("button");
     acceptBtn.textContent = "Accept";
+    acceptBtn.classList.add("btn", "btn-select");
 
     const rejectBtn = document.createElement("button");
     rejectBtn.textContent = "Reject";
+    rejectBtn.classList.add("btn", "btn-reject");
 
     acceptBtn.onclick = async () => {
         await apiRequest("/application/respond", "POST", {
@@ -112,6 +114,7 @@ async function renderProfileList(appliedProfiles) {
         text.textContent = `${profile.company_name} - ${profile.designation}`;
 
         const btn = document.createElement("button");
+	btn.classList.add("btn");
         if (appliedProfiles.has(profile.profile_code)) {
 	    btn.textContent = appliedProfiles.get(profile.profile_code);
 	    btn.disabled = true;

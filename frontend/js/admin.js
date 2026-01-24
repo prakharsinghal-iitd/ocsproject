@@ -33,6 +33,7 @@ function renderAdminCreateProfile(parent) {
 
     const btn = document.createElement("button");
     btn.textContent = "Create Profile";
+    btn.classList.add("btn");
 
     btn.onclick = async () => {
         if (!recruiterInput.value || !companyInput.value || !designationInput.value) {
@@ -111,6 +112,7 @@ function renderAdminApplications(groupedApplications,parent) {
                 selectBtn.dataset.profileCode = profileCode;
                 selectBtn.dataset.entryNumber = app.entry_number;
                 selectBtn.onclick = changeAdminStatus;
+		selectBtn.classList.add("btn","btn-select");
 
                 row.appendChild(selectBtn);
             }

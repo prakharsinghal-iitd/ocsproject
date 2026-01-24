@@ -32,7 +32,7 @@ def get_db_connection():
     return psycopg2.connect(**DB_CONFIG)
 
 app = Flask(__name__)
-CORS(app, origins=["https://ocsproject.vercel.app"])
+CORS(app)
 
 @app.route("/api/health")
 def health():

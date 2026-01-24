@@ -33,6 +33,7 @@ function renderCreateProfileForm(parent) {
 
     const btn = document.createElement("button");
     btn.textContent = "Create Profile";
+    btn.classList.add("btn");
 
     btn.onclick = async () => {
         if (!companyInput.value || !designationInput.value) {
@@ -123,6 +124,7 @@ function renderRecruiterApplications(groupedApplications,parent) {
                 selectBtn.dataset.profileCode = profileCode;
                 selectBtn.dataset.entryNumber = app.entry_number;
                 selectBtn.onclick = selectRecruiterStatus;
+		selectBtn.classList.add("btn", "btn-select");
 
                 row.appendChild(selectBtn);
 
@@ -132,6 +134,7 @@ function renderRecruiterApplications(groupedApplications,parent) {
                 rejectBtn.dataset.profileCode = profileCode;
                 rejectBtn.dataset.entryNumber = app.entry_number;
                 rejectBtn.onclick = rejectRecruiterStatus;
+		rejectBtn.classList.add("btn", "btn-reject");
 
                 row.appendChild(rejectBtn);
 
