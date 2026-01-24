@@ -1,6 +1,6 @@
 // frontend/js/api.js
 
-const API_BASE = "http://localhost:8000/api";
+const API_BASE = "https://ocsproject-backend.vercel.app/api";
 
 function getToken() {
     return localStorage.getItem("token");
