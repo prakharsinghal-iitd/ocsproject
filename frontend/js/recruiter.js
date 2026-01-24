@@ -122,7 +122,7 @@ function renderRecruiterApplications(groupedApplications,parent) {
                 selectBtn.textContent = "Select";
                 selectBtn.dataset.profileCode = profileCode;
                 selectBtn.dataset.entryNumber = app.entry_number;
-                selectBtn.onclick = changeStatus;
+                selectBtn.onclick = changeRecruiterStatus;
 
                 row.appendChild(selectBtn);
             }
@@ -135,7 +135,7 @@ function renderRecruiterApplications(groupedApplications,parent) {
 }
 
 
-async function changeStatus(e) {
+async function changeRecruiterStatus {
     const profileCode = e.target.dataset.profileCode;
     const entryNumber = e.target.dataset.entryNumber;
 

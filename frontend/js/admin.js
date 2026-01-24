@@ -110,7 +110,7 @@ function renderAdminApplications(groupedApplications,parent) {
                 selectBtn.textContent = "Select";
                 selectBtn.dataset.profileCode = profileCode;
                 selectBtn.dataset.entryNumber = app.entry_number;
-                selectBtn.onclick = changeStatus;
+                selectBtn.onclick = changeAdminStatus;
 
                 row.appendChild(selectBtn);
             }
@@ -123,7 +123,7 @@ function renderAdminApplications(groupedApplications,parent) {
 }
 
 
-async function changeStatus(e) {
+async function changeAdminStatus(e) {
     const profileCode = e.target.dataset.profileCode;
     const entryNumber = e.target.dataset.entryNumber;
 
