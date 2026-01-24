@@ -135,10 +135,9 @@ function renderRecruiterApplications(groupedApplications,parent) {
 }
 
 
-async function changeRecruiterStatus {
+async function changeRecruiterStatus(e) {
     const profileCode = e.target.dataset.profileCode;
     const entryNumber = e.target.dataset.entryNumber;
-
     await apiRequest("/application/change_status", "POST", {
         profile_code: profileCode,
         entry_number: entryNumber,
