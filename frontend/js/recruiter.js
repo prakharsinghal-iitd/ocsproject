@@ -116,15 +116,25 @@ function renderRecruiterApplications(groupedApplications,parent) {
                 <span>Status: ${app.status}</span>
             `;
 
-            // Action buttons (example)
+            // Action buttons
             if (app.status === "Applied") {
                 const selectBtn = document.createElement("button");
                 selectBtn.textContent = "Select";
                 selectBtn.dataset.profileCode = profileCode;
                 selectBtn.dataset.entryNumber = app.entry_number;
-                selectBtn.onclick = changeRecruiterStatus;
+                selectBtn.onclick = selectRecruiterStatus;
 
                 row.appendChild(selectBtn);
+
+
+		const rejectBtn = document.createElement("button");
+                rejectBtn.textContent = "Select";
+                rejectBtn.dataset.profileCode = profileCode;
+                rejectBtn.dataset.entryNumber = app.entry_number;
+                rejectBtn.onclick = rejectRecruiterStatus;
+
+                row.appendChild(rejectBtn);
+
             }
 
             profileDiv.appendChild(row);
@@ -135,7 +145,7 @@ function renderRecruiterApplications(groupedApplications,parent) {
 }
 
 
-async function changeRecruiterStatus(e) {
+async function selectRecruiterStatus(e) {
     const profileCode = e.target.dataset.profileCode;
     const entryNumber = e.target.dataset.entryNumber;
     await apiRequest("/application/change_status", "POST", {
@@ -146,4 +156,17 @@ async function changeRecruiterStatus(e) {
 
     loadRecruiterDashboard(); // refresh
 }
+
+async function rejectRecruiterStatus(e) {
+    const profileCode = e.target.dataset.profileCode;
+    const entryNumber = e.target.dataset.entryNumber;
+    await apiRequest("/application/change_status", "POST", {
+        profile_code: profileCode,
+        entry_number: entryNumber,
+        new_status: "Rejected"
+    });
+
+    loadRecruiterDashboard(); // refresh
+}
+
 
