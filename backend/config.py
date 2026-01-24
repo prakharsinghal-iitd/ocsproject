@@ -1,8 +1,8 @@
 DB_CONFIG = {
     "dbname": "postgres",
-    "user": "postgres",
+    "user": "postgres.srfpozcqwizombxyykrs",
     "password": "ocsiitd@2026",
-    "host": "db.srfpozcqwizombxyykrs.supabase.co",
+    "host": "aws-1-ap-south-1.pooler.supabase.com",
     "port": 5432
 }
 
