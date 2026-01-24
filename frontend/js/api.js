@@ -25,7 +25,8 @@ async function apiRequest(endpoint, method = "GET", body = null) {
     const data = await response.json();
 
     if (!response.ok) {
-        throw data;
+        alert(data.error||"Something went wrong");
+	throw new Error(data.error);
     }
 
     return data;

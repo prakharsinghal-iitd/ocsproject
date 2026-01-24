@@ -280,7 +280,7 @@ def change_status():
     if not res:
         return jsonify({"error": "Student has not applied for this profile"}), 404
     #Check that new_status is Selected
-    if new_status!="Selected" or (role!="recruiter" and new_status=="Rejected"):
+    if new_status not in ["Selected","Rejected"] or (role!="recruiter" and new_status=="Rejected"):
         return jsonify({"error": "Invalid new status"}), 400
 
     #Check if student already has a selected application
